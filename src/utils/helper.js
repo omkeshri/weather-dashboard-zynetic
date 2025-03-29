@@ -61,8 +61,9 @@ export const filteredDailyForeCastData = (weatherData) =>
 
 export const filteredHourlyForeCastData = (weatherData) => {
   const data = [];
-  const today = new Date().toISOString().split("T")[0]; // Get today's date (YYYY-MM-DD)
-
+  // const today = new Date().toISOString().split("T")[0]; // Get today's date (YYYY-MM-DD)
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }); 
+console.log(today)
   weatherData.forEach((item) => {
     if (item.dt_txt.startsWith(today)) {
       // Filter only today's data

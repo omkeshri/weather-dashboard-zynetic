@@ -21,7 +21,9 @@ const Body = () => {
     (store) => store.hourlyForeCast.hourlyForecastData
   );
 
-  const recentSearchData = useSelector((store) => store.recentSearch.searchData);
+  const recentSearchData = useSelector(
+    (store) => store.recentSearch.searchData
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,18 +45,21 @@ const Body = () => {
 
       <div className="w-1/2 p-10 flex flex-col justify-around space-y-5">
         <WeatherForecastContainer
+          id={1}
           badge={<GoClock />}
           label="TODAY 3-HOURLY FORECAST"
           data={hourlyForecastData}
         />
 
         <WeatherForecastContainer
+          id={2}
           badge={<MdCalendarToday />}
           label="5-DAY-FORECAST"
           data={dailyForeCastData}
         />
 
         <WeatherForecastContainer
+          id={3}
           badge={<FaClockRotateLeft />}
           label="RECENT SEARCH"
           data={recentSearchData}
