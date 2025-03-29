@@ -4,7 +4,7 @@ import ForeCastCard from "./ForeCastCard";
 const WeatherForecastContainer = ({ id, badge, label, data = [] }) => {
   
   return (
-    <div className="bg-black opacity-50 w-full p-5 rounded-lg">
+    <div className="bg-gray-950 brightness-105 shadow-lg w-full p-5 rounded-lg">
       <div className="flex items-center gap-2 mb-2">
         <div className="scale-110">{badge}</div>
         <p>{label}</p>

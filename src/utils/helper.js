@@ -1,10 +1,10 @@
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-export const getCurrentWeatherData = async (city) => {
+export const getCurrentWeatherData = async (query) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?${query}&appid=${API_KEY}&units=metric`
     );
 
     const data = await response.json();
@@ -79,10 +79,10 @@ console.log(today)
   return data;
 };
 
-export const fetchWeatherData = async (city) => {
+export const fetchWeatherData = async (query) => {
   try {
     const response = await fetch(
-      "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=" +
+      "https://api.openweathermap.org/data/2.5/forecast?"+query+"&appid=" +
         API_KEY +
         "&units=metric"
     );
@@ -103,3 +103,24 @@ export const fetchWeatherData = async (city) => {
     return { dailyForeCastFilteredData: null, hourlyForeCastFilteredData: null, error: err.message }; // Returning an error object for handling in the caller function
   }
 };
+
+export const getUserLocation = () => {
+  return new Promise((resolve, reject) => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (error) => {
+          reject(`Error fetching location: ${error.message}`);
+        }
+      );
+    } else {
+      reject("Geolocation is not supported by this browser.");
+    }
+  });
+};
+
