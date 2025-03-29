@@ -2,7 +2,7 @@ import React from "react";
 
 import WeatherInfoCard from "./WeatherInfoCard";
 
-const WeatherForecastCard = ({ icon, label }) => {
+const WeatherForecastContainer = ({ icon, label }) => {
   return (
     <div className="bg-black opacity-50 w-full p-5 rounded-lg">
       <div className="flex items-center gap-2 mb-2">
@@ -22,4 +22,4 @@ const WeatherForecastCard = ({ icon, label }) => {
   );
 };
 
-export default WeatherForecastCard;
+export default WeatherForecastContainer;
