@@ -5,12 +5,18 @@ import { FaRegEye } from "react-icons/fa";
 import { LuWind } from "react-icons/lu";
 import { getWindDirection } from "../../../../utils/helper";
 import WeatherDetailCard from "./WeatherDetailCard";
+import { useSelector } from "react-redux";
 
-const WeatherStatsContainer = ({ currentWeatherData }) => {
+const WeatherStatsContainer = () => {
+  const currentWeatherData = useSelector((store) => store.currentWeather.currentWeatherData);
+  if (!currentWeatherData || Object.keys(currentWeatherData).length === 0) return "hash";
   const feelLikeDescription =
-    currentWeatherData.main.temp < currentWeatherData.main.feels_like
-      ? "Humidity is making it feel warmer"
-      : "Wind is making it feel colder";
+  Math.trunc(currentWeatherData.main.temp) < Math.trunc(currentWeatherData.main.feels_like)
+    ? "Humidity is making it feel warmer"
+    : Math.trunc(currentWeatherData.main.temp) > Math.trunc(currentWeatherData.main.feels_like)
+    ? "Wind is making it feel colder"
+    : "Feels just like the actual temperature";
+
 
   const windDirection = getWindDirection(currentWeatherData.wind.speed);
   const windSpeedDescription =

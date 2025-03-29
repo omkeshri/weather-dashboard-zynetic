@@ -6,11 +6,11 @@ const hourlyForeCastSlice = createSlice({
     hourlyForecastData: [],
   },
   reducers: {
-    addData: (state, action) => {
-      state.data = action.payload;
+    addHourlyForeCastData: (state, action) => {
+      state.hourlyForecastData = action.payload;
     },
   },
 });
 
-export const { addData } = hourlyForeCastSlice.actions;
+export const { addHourlyForeCastData } = hourlyForeCastSlice.actions;
 export default hourlyForeCastSlice.reducer;

@@ -1,28 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CurrentWeatherContainer from "./CurrentWeather/CurrentWeatherContainer";
 import WeatherForecastContainer from "./ForeCastSection/WeatherForecastContainer";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { GoClock } from "react-icons/go";
 import { MdCalendarToday } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { addDailyForeCastData } from "../../utils/dailyForeCastSlice";
+import { addHourlyForeCastData } from "../../utils/hourlyForeCastSlice";
+import { fetchWeatherData } from "../../utils/helper";
+import Search from "./Search/Search";
 
 const Body = () => {
-  
+  const dispatch = useDispatch();
+
+  const dailyForeCastData = useSelector(
+    (store) => store.dailyForeCast.dailyForeCastData
+  );
+
+  const hourlyForecastData = useSelector(
+    (store) => store.hourlyForeCast.hourlyForecastData
+  );
+
+  const recentSearchData = useSelector((store) => store.recentSearch.searchData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { dailyForeCastFilteredData, hourlyForeCastFilteredData } =
+        await fetchWeatherData("phagwara");
+      dispatch(addDailyForeCastData(dailyForeCastFilteredData));
+      dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div className="h-full bg-[#111720] rounded-4xl text-white flex  overflow-scroll no-scrollbar">
-      <div className="w-1/2 p-10">
+    <div className=" bg-[#111720] rounded-4xl text-white flex  overflow-scroll no-scrollbar h-full">
+      <div className="w-1/2 p-10 space-y-2">
+        <Search />
         <CurrentWeatherContainer />
       </div>
 
       <div className="w-1/2 p-10 flex flex-col justify-around space-y-5">
-        <WeatherForecastContainer icon={<GoClock />} label="HOURLY FORECAST" />
         <WeatherForecastContainer
-          icon={<MdCalendarToday />}
-          label="5-DAY-FORECAST"
+          badge={<GoClock />}
+          label="TODAY 3-HOURLY FORECAST"
+          data={hourlyForecastData}
         />
+
         <WeatherForecastContainer
-          icon={<FaClockRotateLeft />}
+          badge={<MdCalendarToday />}
+          label="5-DAY-FORECAST"
+          data={dailyForeCastData}
+        />
+
+        <WeatherForecastContainer
+          badge={<FaClockRotateLeft />}
           label="RECENT SEARCH"
+          data={recentSearchData}
         />
       </div>
     </div>

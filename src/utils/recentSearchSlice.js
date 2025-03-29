@@ -7,7 +7,7 @@ const recentSearchSlice = createSlice({
     }, 
     reducers: {
         addSearchData: (state, action) => {
-            state.searchData = action.payload
+            state.searchData.push(action.payload)
         }
     }
 })

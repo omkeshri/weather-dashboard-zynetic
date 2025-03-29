@@ -1,84 +1,4 @@
-// https://api.openweathermap.org/data/2.5/weather?q=phagwara&appid=1a65ca96b19ff48991458fcae57fccd3&units=metric
 
-import { LuWind } from "react-icons/lu";
-import { PiThermometer } from "react-icons/pi";
-import { FaRegEye } from "react-icons/fa";
-import { WiHumidity } from "react-icons/wi";
-export const API_DATA = {
-  coord: {
-    lon: 75.7694,
-    lat: 31.2178,
-  },
-  weather: [
-    {
-      id: 800,
-      main: "Clear",
-      description: "clear sky",
-      icon: "01d",
-    },
-  ],
-  base: "stations",
-  main: {
-    temp: 25.92,
-    feels_like: 24.72,
-    temp_min: 25.92,
-    temp_max: 25.92,
-    pressure: 1007,
-    humidity: 6,
-    sea_level: 1007,
-    grnd_level: 980,
-  },
-  visibility: 10000,
-  wind: {
-    speed: 3.74,
-    deg: 297,
-    gust: 5.06,
-  },
-  clouds: {
-    all: 0,
-  },
-  dt: 1743252504,
-  sys: {
-    country: "IN",
-    sunrise: 1743209372,
-    sunset: 1743254020,
-  },
-  timezone: 19800,
-  id: 1259827,
-  name: "Phagwāra",
-  cod: 200,
-};
-
-export const weatherStatsProps = [
-  {
-    icon: <PiThermometer />,
-    label: "FEELS LIKE",
-    // value: currentWeatherData.main.feels_like,
-    unit: "°C",
-    description: "Humidity is making it feel warmer",
-  },
-  {
-    icon: <LuWind />,
-    label: "WIND SPEED",
-    // value: currentWeatherData.wind.speed,
-    unit: "MPH",
-    description: "Current wind speed",
-  },
-  {
-    icon: <FaRegEye />,
-    label: "VISIBILITY",
-    // value: currentWeatherData.visibility / 1000, // Convert meters to km
-    unit: "km",
-    description: "Distance you can see clearly",
-  },
-  {
-    icon: <WiHumidity />,
-    label: "HUMIDITY",
-    // value: currentWeatherData.main.humidity,
-    unit: "%",
-    description: "Moisture level in the air",
-  },
-];
 
 export const FIVE_DAY = {
   cod: "200",
@@ -533,16 +453,13 @@ export const FIVE_DAY = {
   },
 };
 
-
 export const filteredData = FIVE_DAY.list.reduce((acc, item) => {
-    if (item.dt_txt.includes("00:00:00")) {
-        acc.push({
-            date: item.dt_txt.split(" ")[0], // Extracts only the date part
-            temp: item.main.temp,
-            icon: item.weather[0].icon
-        });
-    }
-    return acc;
+  if (item.dt_txt.includes("00:00:00")) {
+    acc.push({
+      date: item.dt_txt.split(" ")[0], // Extracts only the date part
+      temp: item.main.temp,
+      icon: item.weather[0].icon,
+    });
+  }
+  return acc;
 }, []);
-
-

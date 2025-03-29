@@ -6,11 +6,11 @@ const dailyForeCastSlice = createSlice({
         dailyForeCastData: []
     },
     reducers: {
-        addDailyForeCaseData: (state,action) => {
+        addDailyForeCastData: (state,action) => {
             state.dailyForeCastData = action.payload
         }
     }
 })
 
-export const {addDailyForeCaseData} = dailyForeCastSlice.actions;
+export const {addDailyForeCastData} = dailyForeCastSlice.actions;
 export default dailyForeCastSlice.reducer;

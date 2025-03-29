@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { API_DATA } from "../../../../utils/constant";
+import { useSelector } from "react-redux";
 
-const WeatherInfo = ({ currentWeatherData }) => {
+const WeatherInfo = ({  }) => {
+  const currentWeatherData = useSelector((store) => store.currentWeather.currentWeatherData);
+  if (!currentWeatherData || Object.keys(currentWeatherData).length === 0) return "hash";
   const { main, description, icon } = currentWeatherData?.weather[0];
 
   return (
-    <div className=" flex flex-col items-center px-10 pt-16 pb-10">
+    <div className=" flex flex-col items-center px-10 pt-10 pb-10">
       <div className="w-10">
         <img
           src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
