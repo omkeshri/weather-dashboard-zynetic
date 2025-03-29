@@ -1,9 +1,11 @@
+import Body from "./components/Dashboard/Body";
+
 function App() {
 
   return (
-    <>
-      <p className="font-bold text-4xl">af</p>
-    </>
+    <div className="bg-[#15355c] h-screen py-6 px-32">
+      <Body />
+    </div>
   );
 }
 

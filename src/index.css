@@ -8,4 +8,23 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-}
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 4px; /* Thin scrollbar */
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Invisible track */
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3); /* Light-colored scrollbar */
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5); /* Slightly brighter on hover */
+  }
+
+  /* For Firefox */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+} 
