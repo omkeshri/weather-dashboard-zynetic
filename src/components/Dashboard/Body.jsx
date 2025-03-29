@@ -6,6 +6,8 @@ import { GoClock } from "react-icons/go";
 import { MdCalendarToday } from "react-icons/md";
 
 const Body = () => {
+  
+
   return (
     <div className="h-full bg-[#111720] rounded-4xl text-white flex  overflow-scroll no-scrollbar">
       <div className="w-1/2 p-10">
@@ -22,7 +24,6 @@ const Body = () => {
           icon={<FaClockRotateLeft />}
           label="RECENT SEARCH"
         />
-
       </div>
     </div>
   );
