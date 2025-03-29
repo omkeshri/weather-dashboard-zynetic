@@ -7,7 +7,7 @@ import { addHourlyForeCastData } from "../../../utils/hourlyForeCastSlice";
 import { addSearchData } from "../../../utils/recentSearchSlice";
 import { FaSearch } from "react-icons/fa";
 import { HiRefresh } from "react-icons/hi";
-import { addCityCountry } from "../../../utils/appSlice";
+import { addCityCountry, setShowShimmer } from "../../../utils/appSlice";
 
 const Search = ({ setError }) => {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const Search = ({ setError }) => {
   const { lat, lon } = useSelector((store) => store.app);
 
   const handleSearch = async () => {
+    dispatch(setShowShimmer(1));
     if (!searchCity.trim()) {
       console.error("City name cannot be empty");
       return;
@@ -44,6 +45,7 @@ const Search = ({ setError }) => {
     dispatch(addDailyForeCastData(dailyForeCastFilteredData));
     dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
     setSearchCity("");
+    dispatch(setShowShimmer(0))
   };
 
   const handleRefresh = async () => {

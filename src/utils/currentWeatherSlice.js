@@ -8,7 +8,6 @@ const currentWeatherSlice = createSlice({
     reducers: {
         addCurrentWeatherData:(state,action) => {
             state.currentWeatherData = action.payload;
-            // console.log(state.currentWeatherData)
         }
     }
 })

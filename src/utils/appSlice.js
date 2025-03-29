@@ -7,6 +7,7 @@ const appSlice = createSlice({
     lon: "",
     city: "",
     country: "",
+    showShimmer: 1,
   },
   reducers: {
     addLocation: (state, action) => {
@@ -17,8 +18,11 @@ const appSlice = createSlice({
       (state.city = action.payload.city),
         (state.country = action.payload.country);
     },
+    setShowShimmer: (state, action) => {
+      state.showShimmer = action.payload;
+    },
   },
 });
 
-export const { addLocation, addCityCountry } = appSlice.actions;
+export const { addLocation, addCityCountry, setShowShimmer } = appSlice.actions;
 export default appSlice.reducer;

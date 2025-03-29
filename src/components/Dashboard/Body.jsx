@@ -43,8 +43,10 @@ const Body = () => {
     fetchData();
   }, []);
 
+
+  if (!hourlyForecastData||!dailyForeCastData||!recentSearchData) return <Shimmer/>
   return (
-    <div className=" bg-black opacity-80 rounded-4xl text-white flex  overflow-scroll no-scrollbar h-full">
+    <div className="w-full bg-black opacity-80 rounded-4xl text-white flex  overflow-scroll no-scrollbar h-full">
       <div className="w-1/2 p-10 space-y-2">
         <Search setError={(err) => setError(err)} />
         {!error ? <CurrentWeatherContainer /> : <></>}
