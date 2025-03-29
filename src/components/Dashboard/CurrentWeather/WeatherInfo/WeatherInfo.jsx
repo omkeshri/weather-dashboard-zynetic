@@ -1,8 +1,8 @@
-import React from "react";
-import { API_DATA } from "../../../utils/constant";
+import React, { useEffect, useState } from "react";
+import { API_DATA } from "../../../../utils/constant";
 
-const WeatherInfo = () => {
-  const { main, description, icon } = API_DATA.weather[0];
+const WeatherInfo = ({ currentWeatherData }) => {
+  const { main, description, icon } = currentWeatherData?.weather[0];
 
   return (
     <div className=" flex flex-col items-center px-10 pt-16 pb-10">
@@ -14,7 +14,7 @@ const WeatherInfo = () => {
       </div>
 
       <h1 className="text-6xl font-medium mb-2">
-        {Math.trunc(API_DATA.main.temp)}°C
+        {Math.trunc(currentWeatherData.main.temp)}°C
       </h1>
 
       <h3 className="text-lg mb-2 tracking-wide">{main}</h3>

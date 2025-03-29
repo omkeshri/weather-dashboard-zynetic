@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const WeatherDetailCard = ({ icon, label, value, unit, description }) => {
   return (
     <div className="bg-black p-4 rounded-xl shadow-md flex flex-col text-white w-[230px] opacity-70 min-h-[140px]">
@@ -11,9 +10,10 @@ const WeatherDetailCard = ({ icon, label, value, unit, description }) => {
 
       {/* Value */}
       <p className="text-4xl font-medium mb-3">
-        {Math.trunc(value)} {unit}
+        {Math.trunc(value)} 
+        {unit}
       </p>
-    <p className="text-xs tracking-wide w-[90%]">{description}</p>
+      <p className="text-xs tracking-wide w-[90%]">{description}</p>
     </div>
   );
 };

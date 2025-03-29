@@ -53,28 +53,28 @@ export const weatherStatsProps = [
   {
     icon: <PiThermometer />,
     label: "FEELS LIKE",
-    value: API_DATA.main.feels_like,
+    // value: currentWeatherData.main.feels_like,
     unit: "°C",
     description: "Humidity is making it feel warmer",
   },
   {
     icon: <LuWind />,
     label: "WIND SPEED",
-    value: API_DATA.wind.speed,
+    // value: currentWeatherData.wind.speed,
     unit: "MPH",
     description: "Current wind speed",
   },
   {
     icon: <FaRegEye />,
     label: "VISIBILITY",
-    value: API_DATA.visibility / 1000, // Convert meters to km
+    // value: currentWeatherData.visibility / 1000, // Convert meters to km
     unit: "km",
     description: "Distance you can see clearly",
   },
   {
     icon: <WiHumidity />,
     label: "HUMIDITY",
-    value: API_DATA.main.humidity,
+    // value: currentWeatherData.main.humidity,
     unit: "%",
     description: "Moisture level in the air",
   },
