@@ -33,11 +33,9 @@ const Body = () => {
     
 
     const fetchData = async () => {
-      let {lat, lon} = await getUserLocation();
-      if (!lat || !lon){
-        lat=28.70,
-        lon=77.10
-      }
+      const location = await getUserLocation();
+      const lat = location?.let || 31.22;
+      const lon = location?.let || 75.77;
       dispatch(addLocation({lat, lon}));
       const { dailyForeCastFilteredData, hourlyForeCastFilteredData } =
         await fetchWeatherData("lat="+lat+"&lon="+lon);
