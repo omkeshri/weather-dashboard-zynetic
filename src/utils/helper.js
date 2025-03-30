@@ -105,7 +105,7 @@ export const fetchWeatherData = async (query) => {
 };
 
 export const getUserLocation = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -115,12 +115,18 @@ export const getUserLocation = () => {
           });
         },
         (error) => {
-          reject(`Error fetching location: ${error.message}`);
-        }
+          console.warn("Geolocation error:", error.message);
+          // Default location (New Delhi|Pitampura)
+          resolve({ lat: 28.70, lon: 77.10 });
+        },
+        { timeout: 10000, enableHighAccuracy: true }
       );
     } else {
-      reject("Geolocation is not supported by this browser.");
+      console.warn("Geolocation not supported.");
+      // Default location if geolocation is unavailable
+      resolve({ lat: 28.70, lon: 77.10 });
     }
   });
 };
+
 
