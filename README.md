@@ -11,3 +11,32 @@ components/
 │      ├── WeatherForeCastContainer
 │          ├── ForeCastCard
         
+
+        Current Weather Container                   ForeCast Section
+ ------------------------------------------------------------------------------
+|                                      |                                       |
+|                                      |                                       |
+|                                      |                                       |
+|                                      |            Weather ForeCast           |
+|                                      |              Container 1              |
+|                                      |         3 hour weather data           |
+|           Weather Info               |                                       |
+|                                      | ------------------------------------- |
+|                                      |                                       |
+|                                      |                                       |
+|                                      |                                       |
+|                                      |            Weather ForeCast           |
+| ------------------------------------ |              Container 2              |
+|                                      |            5 day weather data         |
+|                                      |                                       |
+|                                      |                                       |
+|                                      |                                       |
+|                                      | ------------------------------------- |
+|                                      |                                       |
+|          WeatherStats                |                                       |
+|                                      |           Weather ForeCast            |
+|                                      |            Container 3                |
+|                                      |           Recent Searches             |
+|                                      |                                       |
+|                                      |                                       |    
+ -------------------------------------------------------------------------------
