@@ -27,7 +27,7 @@ function App() {
             ? "https://img.freepik.com/free-photo/view-apocalyptic-dark-stormy-clouds_23-2151065786.jpg"
             : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4JCyrTQdWMI_VhORmv4vxZbrcALHyBJFHRw&s"
         }
-        alt="Stormy Clouds Background"
+        alt="Background"
         className="absolute top-0 left-0 w-full h-full object-cover"
       />
 

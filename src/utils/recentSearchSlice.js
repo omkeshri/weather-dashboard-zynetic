@@ -11,6 +11,7 @@ const recentSearchSlice = createSlice({
         (item) => item.city === action.payload.city
       );
       if (!cityExist) state.searchData.unshift(action.payload);
+      state.searchData.splice(5, 1);
     },
   },
 });

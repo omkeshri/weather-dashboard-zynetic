@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import CurrentWeatherContainer from "./CurrentWeather/CurrentWeatherContainer";
 import WeatherForecastContainer from "./ForeCastSection/WeatherForecastContainer";
-import { FaClockRotateLeft } from "react-icons/fa6";
-import { GoClock } from "react-icons/go";
-import { MdCalendarToday } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { addDailyForeCastData } from "../../utils/dailyForeCastSlice";
+import CurrentWeatherContainer from "./CurrentWeather/CurrentWeatherContainer";
 import { addHourlyForeCastData } from "../../utils/hourlyForeCastSlice";
 import { fetchWeatherData, getUserLocation } from "../../utils/helper";
+import { addDailyForeCastData } from "../../utils/dailyForeCastSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { FaClockRotateLeft } from "react-icons/fa6";
+import { addLocation } from "../../utils/appSlice";
+import React, { useEffect, useState } from "react";
+import { MdCalendarToday } from "react-icons/md";
+import { GoClock } from "react-icons/go";
 import Search from "./Search/Search";
 import Error from "../Error/Error";
-import { addLocation } from "../../utils/appSlice";
 
 const Body = () => {
   const dispatch = useDispatch();
