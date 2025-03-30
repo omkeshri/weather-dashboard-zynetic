@@ -74,7 +74,7 @@ const Search = ({ setError }) => {
           currentTheme === "dark"
             ? "bg-gray-900"
             : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium"
-        } rounded-2xl focus:outline-none px-3  py-1 text-xs`}
+        } rounded-2xl focus:outline-none px-3 py-2 2xl:py-1 text-xs`}
         value={searchCity}
         onChange={(e) => setSearchCity(e.target.value)}
       ></input>
