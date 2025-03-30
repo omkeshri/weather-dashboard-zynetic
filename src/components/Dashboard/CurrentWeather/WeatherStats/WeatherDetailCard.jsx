@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const WeatherDetailCard = ({ icon, label, value, unit, description }) => {
+  const currentTheme = useSelector((store) => store.app.theme);
   return (
-    <div className="bg-black p-4 rounded-xl shadow-md flex flex-col text-white w-[230px]  min-h-[140px]">
+    <div className={`shadow-lg ${currentTheme==='dark'?"bg-gray-950":"bg-gradient-to-br from-blue-500 to-gray-400 "} p-4 rounded-xl shadow-md flex flex-col text-white w-[230px]  min-h-[140px]`}>
       <div className="flex items-center gap-2">
         <div className="scale-125">{icon}</div>
         <h3 className="text-md font-medium ">{label}</h3>

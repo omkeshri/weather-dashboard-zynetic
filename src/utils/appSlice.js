@@ -8,6 +8,7 @@ const appSlice = createSlice({
     city: "",
     country: "",
     showShimmer: 1,
+    theme: 'dark',
   },
   reducers: {
     addLocation: (state, action) => {
@@ -21,8 +22,11 @@ const appSlice = createSlice({
     setShowShimmer: (state, action) => {
       state.showShimmer = action.payload;
     },
+    setTheme: (state) => {
+        state.theme = state.theme==='dark'?'light':'dark'
+    }
   },
 });
 
-export const { addLocation, addCityCountry, setShowShimmer } = appSlice.actions;
+export const { addLocation, addCityCountry, setShowShimmer, setTheme } = appSlice.actions;
 export default appSlice.reducer;

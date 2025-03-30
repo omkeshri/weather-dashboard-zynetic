@@ -10,6 +10,7 @@ import Shimmer from "../../Shimmer/Shimmer";
 const CurrentWeatherContainer = () => {
   const dispatch = useDispatch();
   
+  const currentTheme = useSelector((store) => store.app.theme);
   const { lat, lon, showShimmer } = useSelector((store) => store.app);
   const currentWeatherData = useSelector(
     (store) => store.currentWeather.currentWeatherData
@@ -31,7 +32,7 @@ const CurrentWeatherContainer = () => {
   if (showShimmer) return <Shimmer />;
   return (
     currentWeatherData && (
-      <div className="bg-gray-950 rounded-lg brightness-105 h-[95%]">
+      <div className={`${currentTheme==='dark'?"bg-gray-950":"bg-gradient-to-br from-blue-200 to-gray-300"} rounded-lg brightness-105 h-[95%]`}>
         <WeatherInfo currentWeatherData={currentWeatherData} />
         <WeatherStatsContainer currentWeatherData={currentWeatherData} />
       </div>

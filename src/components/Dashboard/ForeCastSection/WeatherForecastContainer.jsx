@@ -4,19 +4,32 @@ import { useSelector } from "react-redux";
 import Shimmer from "../../Shimmer/Shimmer";
 
 const WeatherForecastContainer = ({ id, badge, label, data = [] }) => {
-  const showShimmer = useSelector((store) => store.app.showShimmer);
+  const { showShimmer, theme: currentTheme } = useSelector(
+    (store) => store.app
+  );
+
   return (
-    <div className="bg-gray-950 brightness-105 shadow-lg w-full p-5 rounded-lg">
+    <div
+      className={`${
+        currentTheme === "dark"
+          ? "bg-gray-950"
+          : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium"
+      } brightness-105 shadow-lg w-full p-5 rounded-lg`}
+    >
       <div className="flex items-center gap-2 mb-2">
         <div className="scale-110">{badge}</div>
-        <p>{label}</p>
+        <p className="tracking-wide">{label}</p>
       </div>
       <hr></hr>
 
       {showShimmer === 1 ? (
-        <div className="py-[1.75rem]"><Shimmer /></div>
+        <div className="py-[1.75rem]">
+          <Shimmer />
+        </div>
       ) : data.length !== 0 ? (
-        <div className="flex gap-10 mt-1 overflow-x-scroll custom-scrollbar pb-1">
+        <div
+          className={`flex gap-10 mt-1 overflow-x-scroll  custom-scrollbar pb-1`}
+        >
           {data.map((val, index) => (
             <ForeCastCard
               key={index}

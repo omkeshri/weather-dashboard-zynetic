@@ -8,16 +8,19 @@ import { addSearchData } from "../../../utils/recentSearchSlice";
 import { FaSearch } from "react-icons/fa";
 import { HiRefresh } from "react-icons/hi";
 import { addCityCountry, setShowShimmer } from "../../../utils/appSlice";
+import SearchButton from "./SearchButton";
 
 const Search = ({ setError }) => {
   const dispatch = useDispatch();
   const [searchCity, setSearchCity] = useState("");
-  const { lat, lon } = useSelector((store) => store.app);
+  const { lat, lon, theme: currentTheme } = useSelector((store) => store.app);
 
   const handleSearch = async () => {
+   
     dispatch(setShowShimmer(1));
     if (!searchCity.trim()) {
-      console.error("City name cannot be empty");
+      setError("Please enter city name or refresh!");
+      dispatch(setShowShimmer(1));
       return;
     }
 
@@ -45,11 +48,12 @@ const Search = ({ setError }) => {
     dispatch(addDailyForeCastData(dailyForeCastFilteredData));
     dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
     setSearchCity("");
-    dispatch(setShowShimmer(0))
+    dispatch(setShowShimmer(0));
   };
 
   const handleRefresh = async () => {
-    console.log("click");
+    setError(0);
+    dispatch(setShowShimmer(1));
     if (!lat || !lon) return;
     const currentWeatherData = await getCurrentWeatherData(
       "lat=" + lat + "&lon=" + lon
@@ -59,28 +63,26 @@ const Search = ({ setError }) => {
     dispatch(addCurrentWeatherData(currentWeatherData));
     dispatch(addDailyForeCastData(dailyForeCastFilteredData));
     dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
+    dispatch(setShowShimmer(0));
   };
 
   return (
     <div className="w-full flex">
       <input
         type="text"
-        className="w-full bg-gray-900 rounded-2xl focus:outline-none px-3  py-1 text-xs"
+        className={`w-full ${
+          currentTheme === "dark"
+            ? "bg-gray-900"
+            : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium"
+        } rounded-2xl focus:outline-none px-3  py-1 text-xs`}
         value={searchCity}
         onChange={(e) => setSearchCity(e.target.value)}
       ></input>
-      <button
-        className="bg-gray-900 hover:bg-gray-800 ml-1 text-xs px-4 rounded-full  cursor-pointer"
-        onClick={handleRefresh}
-      >
-        <HiRefresh className="scale-125" />
-      </button>
-      <button
-        className="bg-gray-900 hover:bg-gray-800 ml-1 text-xs px-4 rounded-full  cursor-pointer"
-        onClick={handleSearch}
-      >
-        <FaSearch />
-      </button>
+      <SearchButton
+        icon={<HiRefresh className="scale-125" />}
+        click={() => handleRefresh()}
+      />
+      <SearchButton icon={<FaSearch />} click={() => handleSearch()} />
     </div>
   );
 };
