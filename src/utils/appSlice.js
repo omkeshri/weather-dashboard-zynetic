@@ -5,7 +5,7 @@ const defaultTheme = localStorage.getItem("theme") || 'dark';
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    lat: 28.55,
+    lat: 28.70,
     lon: 77.10,
     city: "",
     country: "",
