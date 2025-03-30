@@ -7,10 +7,7 @@ const recentSearchSlice = createSlice({
   },
   reducers: {
     addSearchData: (state, action) => {
-      const cityExist = state.searchData.some(
-        (item) => item.city === action.payload.city
-      );
-      if (!cityExist) state.searchData.unshift(action.payload);
+      state.searchData.unshift(action.payload);
       state.searchData.splice(5, 1);
     },
   },

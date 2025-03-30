@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { addCityCountry, setShowShimmer } from "./appSlice";
 import { addCurrentWeatherData } from "./currentWeatherSlice";
 import { addDailyForeCastData } from "./dailyForeCastSlice";
@@ -9,7 +10,8 @@ export const handleSearch = async (
   dispatch,
   searchCity,
   setSearchCity,
-  setError
+  setError,
+  recentSearch
 ) => {
   dispatch(setShowShimmer(1));
   if (!searchCity.trim()) {
@@ -18,27 +20,57 @@ export const handleSearch = async (
     return;
   }
 
-  const currentWeatherData = await getCurrentWeatherData("q=" + searchCity);
-  const { dailyForeCastFilteredData, hourlyForeCastFilteredData, error } =
-    await fetchWeatherData("q=" + searchCity);
+  let currentWeatherData;
+  const hasCurrentWeatherData = recentSearch.find(
+    (val) => val.name === searchCity.toUpperCase()
+  );
 
-  if (currentWeatherData.error || error) {
+  if (hasCurrentWeatherData) {
+    currentWeatherData = hasCurrentWeatherData;
+  } else {
+    currentWeatherData = await getCurrentWeatherData("q=" + searchCity);
+    
+    if (currentWeatherData.error) {
+      console.error("Error fetching weather data:", currentWeatherData.error);
+      setError(currentWeatherData.error);
+      return;
+    }
+
+    dispatch(
+      addSearchData({
+        weather: [
+          {
+            main: currentWeatherData.weather[0].main,
+            icon: currentWeatherData?.weather[0].icon,
+            description: currentWeatherData.weather[0].description,
+          },
+        ],
+        main: {
+          temp: Math.trunc(currentWeatherData.main.temp),
+          feels_like: Math.trunc(currentWeatherData.main.feels_like),
+          humidity: currentWeatherData.main.humidity,
+        },
+        visibility: currentWeatherData.visibility / 1000,
+        wind: {
+          speed: Math.trunc(currentWeatherData.wind.speed),
+          deg: currentWeatherData.wind.deg,
+          gust: currentWeatherData.wind.gust,
+        },
+        name: searchCity.toUpperCase(),
+        sys: { country: currentWeatherData.sys.country },
+      })
+    );
+  }
+  dispatch(addCurrentWeatherData(currentWeatherData));
+  const{ dailyForeCastFilteredData, hourlyForeCastFilteredData, error } =
+  await fetchWeatherData("q=" + searchCity);
+  if (currentWeatherData.error) {
     console.error("Error fetching weather data:", currentWeatherData.error);
-    setError(currentWeatherData.error || error);
+    setError(currentWeatherData.error);
     return;
   }
   setError(0);
-  dispatch(
-    addSearchData({
-      city: searchCity.toUpperCase(),
-      temp: Math.trunc(currentWeatherData.main.temp),
-      icon: currentWeatherData?.weather[0].icon,
-    })
-  );
-  const city = currentWeatherData.name;
-  const country = currentWeatherData.sys.country;
-  dispatch(addCityCountry({ city, country }));
-  dispatch(addCurrentWeatherData(currentWeatherData));
+  console.log(dailyForeCastFilteredData);
   dispatch(addDailyForeCastData(dailyForeCastFilteredData));
   dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
   setSearchCity("");
@@ -62,6 +94,7 @@ export const handleRefresh = async (
   const { dailyForeCastFilteredData, hourlyForeCastFilteredData, error } =
     await fetchWeatherData("lat=" + lat + "&lon=" + lon);
   dispatch(addCurrentWeatherData(currentWeatherData));
+
   dispatch(addDailyForeCastData(dailyForeCastFilteredData));
   dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
   dispatch(setShowShimmer(0));

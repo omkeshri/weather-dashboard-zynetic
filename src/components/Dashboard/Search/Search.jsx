@@ -9,6 +9,7 @@ const Search = ({ setError }) => {
   const dispatch = useDispatch();
   const [searchCity, setSearchCity] = useState("");
   const { lat, lon, theme: currentTheme } = useSelector((store) => store.app);
+  const recentSearch = useSelector((store) => store.recentSearch.searchData);
 
   return (
     <div className="w-full flex">
@@ -26,7 +27,7 @@ const Search = ({ setError }) => {
         icon={<HiRefresh className="scale-125" />}
         click={() => handleRefresh(dispatch, setError, lat, lon, setSearchCity)}
       />
-      <SearchButton icon={<FaSearch />} click={() => handleSearch(dispatch, searchCity, setSearchCity, setError)} />
+      <SearchButton icon={<FaSearch />} click={() => handleSearch(dispatch, searchCity, setSearchCity, setError, recentSearch)} />
     </div>
   );
 };

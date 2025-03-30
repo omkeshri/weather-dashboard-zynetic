@@ -8,11 +8,14 @@ const WeatherInfo = ({}) => {
   if (!currentWeatherData || Object.keys(currentWeatherData).length === 0)
     return "hash";
   const { main, description, icon } = currentWeatherData?.weather[0];
-  const { city, country } = useSelector((store) => store.app);
+  const city = currentWeatherData.name;
+  const country = currentWeatherData.sys.country;
   
   return (
     <div className=" flex flex-col items-center px-10 pt-10 pb-10">
-      <h1>{city}, {country}</h1>
+      <h1>
+        {city}, {country}
+      </h1>
       <div className="w-10">
         <img
           src={`https://openweathermap.org/img/wn/${icon}@2x.png`}

@@ -26,18 +26,19 @@ const WeatherForecastContainer = ({ id, badge, label, data = [] }) => {
         <div className="py-[1.75rem]">
           <Shimmer />
         </div>
-      ) : data.length !== 0 ? (
+      ) : data.length > 0 ? (
         <div
+
           className={`flex gap-10 mt-1 overflow-x-scroll  custom-scrollbar pb-1`}
         >
           {data.map((val, index) => (
             <ForeCastCard
               key={index}
-              time={val.time}
-              date={val.date}
-              city={val.city}
-              temp={Math.trunc(val.temp)}
-              icon={val.icon}
+              time={val?.time}
+              date={val?.date}
+              city={val?.name}
+              temp={Math.trunc(val?.main.temp)}
+              icon={val?.weather[0].icon}
             />
           ))}
         </div>

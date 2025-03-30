@@ -21,6 +21,7 @@ const Body = () => {
   const dailyForeCastData = useSelector(
     (store) => store.dailyForeCast.dailyForeCastData
   );
+  console.log(dailyForeCastData)
 
   const hourlyForecastData = useSelector(
     (store) => store.hourlyForeCast.hourlyForecastData

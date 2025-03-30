@@ -47,12 +47,13 @@ export const filteredDailyForeCastData = (weatherData) =>
   weatherData.reduce((acc, item) => {
     if (item.dt_txt.includes("00:00:00")) {
       acc.push({
+        weather: [{ icon: item.weather[0].icon }],
+
         date:
           item.dt_txt.split(" ")[0].split("-")[2] +
           "-" +
           item.dt_txt.split(" ")[0].split("-")[1], // Extracts only the date part
-        temp: item.main.temp,
-        icon: item.weather[0].icon,
+        main: { temp: item.main.temp },
       });
     }
     return acc;
@@ -67,10 +68,10 @@ export const filteredHourlyForeCastData = (weatherData) => {
     if (item.dt_txt.startsWith(today)) {
       // Filter only today's data
       data.push({
-        time: item.dt_txt.split(" ")[1].split(":")[0] + ":00", // Extract hour
-        temp: Math.trunc(item.main.temp),
-        icon: item.weather[0].icon,
-        data: "",
+        weather: [{ icon: item.weather[0].icon }],
+
+        time: item.dt_txt.split(" ")[1].split(":")[0] + ":00", // Extracts only the date part
+        main: { temp: item.main.temp },
       });
     }
   });
