@@ -3,6 +3,7 @@ import { FaLightbulb } from "react-icons/fa";
 import { MdNightlightRound } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "./utils/appSlice";
+import {motion} from 'framer-motion'
 
 function App() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function App() {
       <button
         className={`absolute top-5 right-5 p-[0.7rem] z-10 ${
           currentTheme === "dark" ? "bg-white" : "bg-black text-white"
-        } rounded-full cursor-pointer`}
+        } rounded-full cursor-pointer hover:scale-105`}
         onClick={handleTheme}
       >
         {currentTheme === "dark" ? <FaLightbulb /> : <MdNightlightRound />}
@@ -33,9 +34,12 @@ function App() {
 
       <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
 
-      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center md:pt-6  pt-20 px-2 md:px-20 xl:px-32 py-6">
+      <motion.div className="absolute top-0 left-0 w-full h-full flex justify-center items-center md:pt-6  pt-20 px-2 md:px-20 xl:px-32 py-6"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}>
         <Body />
-      </div>
+      </motion.div>
     </div>
   );
 }

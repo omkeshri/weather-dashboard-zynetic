@@ -8,8 +8,8 @@ const WeatherDetailCard = ({ icon, label, value, unit, description }) => {
       className={`
         ${
           currentTheme === "dark"
-            ? "bg-black opacity-95"
-            : "bg-gradient-to-br from-blue-500 to-gray-400 "
+            ? "bg-black opacity-95 hover:bg-[#161616]"
+            : "bg-gradient-to-br from-blue-500 to-gray-400 hover:bg-gradient-to-br hover:from-blue-600 hover:to-gray-400 "
         } brightness-125
       p-4 rounded-xl shadow-md flex flex-col text-white w-full mx-4 2xl:mx-0 2xl:w-[230px]  min-h-[140px]`}
     >

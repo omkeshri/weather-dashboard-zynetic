@@ -1,4 +1,3 @@
-
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const getCurrentWeatherData = async (query) => {
@@ -61,9 +60,9 @@ export const filteredDailyForeCastData = (weatherData) =>
 
 export const filteredHourlyForeCastData = (weatherData) => {
   const data = [];
-  // const today = new Date().toISOString().split("T")[0]; // Get today's date (YYYY-MM-DD)
-  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }); 
-console.log(today)
+  const today = new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Kolkata",
+  });
   weatherData.forEach((item) => {
     if (item.dt_txt.startsWith(today)) {
       // Filter only today's data
@@ -82,7 +81,9 @@ console.log(today)
 export const fetchWeatherData = async (query) => {
   try {
     const response = await fetch(
-      "https://api.openweathermap.org/data/2.5/forecast?"+query+"&appid=" +
+      "https://api.openweathermap.org/data/2.5/forecast?" +
+        query +
+        "&appid=" +
         API_KEY +
         "&units=metric"
     );
@@ -97,10 +98,18 @@ export const fetchWeatherData = async (query) => {
       json_data.list
     );
 
-    return { dailyForeCastFilteredData, hourlyForeCastFilteredData, error: null };
+    return {
+      dailyForeCastFilteredData,
+      hourlyForeCastFilteredData,
+      error: null,
+    };
   } catch (err) {
     console.error("Failed to fetch weather data:", err.message);
-    return { dailyForeCastFilteredData: null, hourlyForeCastFilteredData: null, error: err.message }; // Returning an error object for handling in the caller function
+    return {
+      dailyForeCastFilteredData: null,
+      hourlyForeCastFilteredData: null,
+      error: err.message,
+    }; // Returning an error object for handling in the caller function
   }
 };
 
@@ -117,16 +126,14 @@ export const getUserLocation = () => {
         (error) => {
           console.warn("Geolocation error:", error.message);
           // Default location (New Delhi|Pitampura)
-          resolve({ lat: 28.70, lon: 77.10 });
+          resolve({ lat: 28.7, lon: 77.1 });
         },
         { timeout: 10000, enableHighAccuracy: true }
       );
     } else {
       console.warn("Geolocation not supported.");
       // Default location if geolocation is unavailable
-      resolve({ lat: 28.70, lon: 77.10 });
+      resolve({ lat: 28.7, lon: 77.1 });
     }
   });
 };
-
-

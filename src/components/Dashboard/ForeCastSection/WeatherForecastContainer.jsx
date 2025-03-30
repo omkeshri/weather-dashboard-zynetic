@@ -12,8 +12,8 @@ const WeatherForecastContainer = ({ id, badge, label, data = [] }) => {
     <div
       className={`${
         currentTheme === "dark"
-          ? "bg-gray-950"
-          : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium"
+          ? "bg-gray-950 hover:bg-[#050505]"
+          : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium hover:bg-gradient-to-br hover:from-blue-300 hover:to-gray-300"
       } brightness-105 shadow-lg w-full p-5 rounded-lg`}
     >
       <div className="flex items-center gap-2 mb-2">

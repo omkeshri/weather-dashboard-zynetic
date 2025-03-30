@@ -16,8 +16,8 @@ const Search = ({ setError }) => {
         type="text"
         className={`w-full ${
           currentTheme === "dark"
-            ? "bg-gray-900"
-            : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium"
+            ? "bg-gray-900 hover:bg-gray-800"
+            : "bg-gradient-to-br from-blue-200 to-gray-300 font-medium hover:bg-gradient-to-br hover:from-blue-300 hover:to-gray-300"
         } rounded-2xl focus:outline-none px-3 py-2 2xl:py-1 text-xs`}
         value={searchCity}
         onChange={(e) => setSearchCity(e.target.value)}

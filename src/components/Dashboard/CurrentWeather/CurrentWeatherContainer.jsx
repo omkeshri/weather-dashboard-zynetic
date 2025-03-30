@@ -37,7 +37,7 @@ const CurrentWeatherContainer = ({setError}) => {
   if (showShimmer) return <Shimmer />;
   return (
     currentWeatherData && (
-      <div className={`${currentTheme==='dark'?"bg-gray-950":"bg-gradient-to-br from-blue-200 to-gray-300"} pb-32 xl:pb-16 rounded-lg brightness-105 h-[89%] xl:overflow-y-scroll 2xl:overflow-y-hidden no-scrollbar  `}>
+      <div className={`${currentTheme==='dark'?"bg-gray-950 hover:bg-[#050505]":"bg-gradient-to-br from-blue-200 to-gray-300 hover:bg-gradient-to-br hover:from-blue-300 hover:to-gray-300"} pb-32 xl:pb-16 rounded-lg brightness-105 h-[89%] xl:overflow-y-scroll 2xl:overflow-y-hidden no-scrollbar `}>
         <WeatherInfo currentWeatherData={currentWeatherData} />
         <WeatherStatsContainer currentWeatherData={currentWeatherData} />
       </div>
