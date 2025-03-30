@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const defaultTheme = localStorage.getItem("theme") || 'dark';
+
 const appSlice = createSlice({
   name: "app",
   initialState: {
@@ -8,7 +10,7 @@ const appSlice = createSlice({
     city: "",
     country: "",
     showShimmer: 1,
-    theme: 'dark',
+    theme: defaultTheme,
   },
   reducers: {
     addLocation: (state, action) => {
@@ -24,6 +26,7 @@ const appSlice = createSlice({
     },
     setTheme: (state) => {
         state.theme = state.theme==='dark'?'light':'dark'
+        localStorage.setItem('theme', state.theme);
     }
   },
 });

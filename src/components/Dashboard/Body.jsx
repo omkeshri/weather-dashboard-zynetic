@@ -47,15 +47,15 @@ const Body = () => {
 
   if (!hourlyForecastData||!dailyForeCastData||!recentSearchData) return <Shimmer/>
   return (
-    <div className={`w-full ${currentTheme==='light'?"bg-[#fff] opacity-70 text-black":"bg-black opacity-80 text-white"}  rounded-4xl  flex  overflow-scroll no-scrollbar h-full`}>
-      <div className="w-1/2 p-10 space-y-2">
+    <div className={`w-full ${currentTheme==='light'?"bg-[#fff] opacity-70 text-black":"bg-black opacity-80 text-white"}  rounded-4xl  flex xl:flex-row flex-col  overflow-scroll no-scrollbar h-full`}>
+      <div className="w-full xl:w-1/2 px-10 pt-10 space-y-2">
         <Search setError={(err) => setError(err)} />
         {!error ? <CurrentWeatherContainer /> : <></>}
         {error ? <Error err={error} /> : <></>}
       </div>
 
       {!error ? (
-        <div className="w-1/2 p-10 flex flex-col justify-around space-y-5">
+        <div className="w-full xl:w-1/2 p-10 flex flex-col justify-around space-y-5">
           <WeatherForecastContainer
             id={1}
             badge={<GoClock />}

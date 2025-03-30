@@ -33,7 +33,7 @@ function App() {
 
       <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
 
-      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center px-32 py-6">
+      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center md:pt-6  pt-20 px-10 md:px-20 xl:px-32 py-6">
         <Body />
       </div>
     </div>
