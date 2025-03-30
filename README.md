@@ -1,4 +1,5 @@
 # DashBoard Structure
+```
 components/
 │── Body.jsx
 │  ├── Search.jsx
@@ -11,7 +12,8 @@ components/
 │      ├── WeatherForeCastContainer
 │          ├── ForeCastCard
         
-
+```
+```
                                     Current Weather Container                   ForeCast Section
                              ------------------------------------------------------------------------------
                             |                                      |                                       |
@@ -40,3 +42,4 @@ Shimmer(Loading Icon) ===>  |                                      |            
                             |                                      |                                       |
                             |                                      |                                       |    
                              -------------------------------------------------------------------------------
+```
