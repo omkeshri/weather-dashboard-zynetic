@@ -7,7 +7,7 @@ import { getCurrentWeatherData } from "../../../utils/helper";
 import { addCityCountry, setShowShimmer } from "../../../utils/appSlice";
 import Shimmer from "../../Shimmer/Shimmer";
 
-const CurrentWeatherContainer = () => {
+const CurrentWeatherContainer = ({setError}) => {
   const dispatch = useDispatch();
   
   const currentTheme = useSelector((store) => store.app.theme);
@@ -20,6 +20,11 @@ const CurrentWeatherContainer = () => {
     if (!lat || !lon) return;
     const fetchWeather = async () => {
       const data = await getCurrentWeatherData("lat=" + lat + "&lon=" + lon);
+      if (data.error) {
+        console.error("Error fetching weather data:", data.error);
+        setError(data.error); // Update state with the error
+        return;
+      }
       dispatch(addCurrentWeatherData(data));
       const city = data.name;
       const country = data.sys.country;

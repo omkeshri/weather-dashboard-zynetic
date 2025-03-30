@@ -24,7 +24,7 @@ const Search = ({ setError }) => {
       ></input>
       <SearchButton
         icon={<HiRefresh className="scale-125" />}
-        click={() => handleRefresh(dispatch, setError, lat, lon)}
+        click={() => handleRefresh(dispatch, setError, lat, lon, setSearchCity)}
       />
       <SearchButton icon={<FaSearch />} click={() => handleSearch(dispatch, searchCity, setSearchCity, setError)} />
     </div>

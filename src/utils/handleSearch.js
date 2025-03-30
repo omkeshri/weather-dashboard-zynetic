@@ -45,18 +45,24 @@ export const handleSearch = async (
   dispatch(setShowShimmer(0));
 };
 
-
-export const handleRefresh = async (dispatch, setError, lat, lon) => {
-    setError(0);
-    dispatch(setShowShimmer(1));
-    if (!lat || !lon) return;
-    const currentWeatherData = await getCurrentWeatherData(
-      "lat=" + lat + "&lon=" + lon
-    );
-    const { dailyForeCastFilteredData, hourlyForeCastFilteredData, error } =
-      await fetchWeatherData("lat=" + lat + "&lon=" + lon);
-    dispatch(addCurrentWeatherData(currentWeatherData));
-    dispatch(addDailyForeCastData(dailyForeCastFilteredData));
-    dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
-    dispatch(setShowShimmer(0));
-  };
+export const handleRefresh = async (
+  dispatch,
+  setError,
+  lat,
+  lon,
+  setSearchCity
+) => {
+  setError(0);
+  setSearchCity("");
+  dispatch(setShowShimmer(1));
+  if (!lat || !lon) return;
+  const currentWeatherData = await getCurrentWeatherData(
+    "lat=" + lat + "&lon=" + lon
+  );
+  const { dailyForeCastFilteredData, hourlyForeCastFilteredData, error } =
+    await fetchWeatherData("lat=" + lat + "&lon=" + lon);
+  dispatch(addCurrentWeatherData(currentWeatherData));
+  dispatch(addDailyForeCastData(dailyForeCastFilteredData));
+  dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
+  dispatch(setShowShimmer(0));
+};

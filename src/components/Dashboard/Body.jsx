@@ -11,6 +11,7 @@ import { MdCalendarToday } from "react-icons/md";
 import { GoClock } from "react-icons/go";
 import Search from "./Search/Search";
 import Error from "../Error/Error";
+import Shimmer from "../Shimmer/Shimmer";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -45,12 +46,11 @@ const Body = () => {
   }, []);
 
 
-  if (!hourlyForecastData||!dailyForeCastData||!recentSearchData) return <Shimmer/>
   return (
     <div className={`w-full ${currentTheme==='light'?"bg-[#fff] opacity-70 text-black":"bg-black opacity-80 text-white"}  rounded-4xl  flex xl:flex-row flex-col  overflow-scroll no-scrollbar h-full`}>
       <div className="w-full xl:w-1/2 px-10 pt-10 space-y-2">
         <Search setError={(err) => setError(err)} />
-        {!error ? <CurrentWeatherContainer /> : <></>}
+        {!error ? <CurrentWeatherContainer setError={setError}/> : <></>}
         {error ? <Error err={error} /> : <></>}
       </div>
 
