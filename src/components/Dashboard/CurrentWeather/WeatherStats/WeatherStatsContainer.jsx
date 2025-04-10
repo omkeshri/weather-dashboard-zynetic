@@ -1,36 +1,27 @@
-import React from "react";
+import { getWindDirection } from "../../../../utils/helper";
+import WeatherDetailCard from "./WeatherDetailCard";
 import { PiThermometer } from "react-icons/pi";
 import { WiHumidity } from "react-icons/wi";
 import { FaRegEye } from "react-icons/fa";
 import { LuWind } from "react-icons/lu";
-import { getWindDirection } from "../../../../utils/helper";
-import WeatherDetailCard from "./WeatherDetailCard";
-import { useSelector } from "react-redux";
 
-const WeatherStatsContainer = () => {
-  const currentWeatherData = useSelector(
-    (store) => store.currentWeather.currentWeatherData
-  );
+const WeatherStatsContainer = ({ currentWeatherData }) => {
   if (!currentWeatherData || Object.keys(currentWeatherData).length === 0)
-    return "hash";
+    return;
 
-  const {temp, feelsLike, windSpeed, windGust, humidity, visibility} = currentWeatherData;
+  const { temp, feelsLike, windSpeed, windGust, humidity, visibility } =
+    currentWeatherData;
 
   const feelLikeDescription =
-    temp <
-    feelsLike
+    temp < feelsLike
       ? "Humidity is making it feel warmer"
-      : temp >
-        feelsLike
+      : temp > feelsLike
       ? "Wind is making it feel colder"
       : "Feels just like the actual temperature";
 
   const windDirection = getWindDirection(windSpeed);
   const windSpeedDescription =
-    "Wind is blowing from " +
-    windDirection +
-    ", gust is " +
-    windGust;
+    "Wind is blowing from " + windDirection + ", gust is " + windGust;
 
   const humidityDescription =
     humidity < 30

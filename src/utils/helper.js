@@ -128,7 +128,7 @@ export const getUserLocation = () => {
           // Default location (New Delhi|Pitampura)
           resolve({ lat: 28.7, lon: 77.1 });
         },
-        { timeout: 10000, enableHighAccuracy: true }
+        { timeout: 20000, enableHighAccuracy: true }
       );
     } else {
       console.warn("Geolocation not supported.");

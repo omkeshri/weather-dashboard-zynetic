@@ -1,5 +1,3 @@
-
-
 export const FIVE_DAY = {
   cod: "200",
   message: 0,
@@ -453,13 +451,13 @@ export const FIVE_DAY = {
   },
 };
 
-export const filteredData = FIVE_DAY.list.reduce((acc, item) => {
-  if (item.dt_txt.includes("00:00:00")) {
-    acc.push({
-      date: item.dt_txt.split(" ")[0], // Extracts only the date part
-      temp: item.main.temp,
-      icon: item.weather[0].icon,
-    });
-  }
-  return acc;
-}, []);
+// export const filteredData = FIVE_DAY.list.reduce((acc, item) => {
+//   if (item.dt_txt.includes("00:00:00")) {
+//     acc.push({
+//       date: item.dt_txt.split(" ")[0], // Extracts only the date part
+//       temp: item.main.temp,
+//       icon: item.weather[0].icon,
+//     });
+//   }
+//   return acc;
+// }, []);

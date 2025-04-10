@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import WeatherInfo from "./WeatherInfo/WeatherInfo";
-import WeatherStatsContainer from "./WeatherStats/WeatherStatsContainer";
-import { useDispatch, useSelector } from "react-redux";
-import { addCurrentWeatherData } from "../../../utils/currentWeatherSlice";
 import { getCurrentWeatherData, getRequiredData } from "../../../utils/helper";
+import { addCurrentWeatherData } from "../../../utils/currentWeatherSlice";
+import WeatherStatsContainer from "./WeatherStats/WeatherStatsContainer";
 import { setShowShimmer } from "../../../utils/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import WeatherInfo from "./WeatherInfo/WeatherInfo";
 import Shimmer from "../../Shimmer/Shimmer";
+import React, { useEffect } from "react";
 
 const CurrentWeatherContainer = ({ setError }) => {
   const dispatch = useDispatch();
-
-  
   const currentTheme = useSelector((store) => store.app.theme);
   const { lat, lon, showShimmer } = useSelector((store) => store.app);
   const currentWeatherData = useSelector(
@@ -19,9 +17,10 @@ const CurrentWeatherContainer = ({ setError }) => {
 
   useEffect(() => {
     if (!lat || !lon) return;
+    
     const fetchWeather = async () => {
       const data = await getCurrentWeatherData("lat=" + lat + "&lon=" + lon);
-      
+
       if (data.error) {
         console.error("Error fetching weather data:", data.error);
         setError(data.error); // Update state with the error
@@ -29,9 +28,8 @@ const CurrentWeatherContainer = ({ setError }) => {
       }
 
       dispatch(addCurrentWeatherData(getRequiredData(data, data.name)));
-
       dispatch(setShowShimmer(0));
-      
+
       // for testing purpose plz ignore
       // const city = data.name;
       // const country = data.sys.country;

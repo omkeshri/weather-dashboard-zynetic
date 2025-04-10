@@ -11,7 +11,6 @@ import { MdCalendarToday } from "react-icons/md";
 import { GoClock } from "react-icons/go";
 import Search from "./Search/Search";
 import Error from "../Error/Error";
-import Shimmer from "../Shimmer/Shimmer";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,9 @@ const Body = () => {
       const { lat, lon } = await getUserLocation();
       dispatch(addLocation({ lat, lon }));
 
-      const { dailyForeCastFilteredData, hourlyForeCastFilteredData } = await fetchWeatherData("lat=" + lat + "&lon=" + lon);
+      const { dailyForeCastFilteredData, hourlyForeCastFilteredData }=
+        await fetchWeatherData("lat=" + lat + "&lon=" + lon);
+
       dispatch(addDailyForeCastData(dailyForeCastFilteredData));
       dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
     };

@@ -28,7 +28,6 @@ const WeatherForecastContainer = ({ id, badge, label, data = [] }) => {
         </div>
       ) : data.length > 0 ? (
         <div
-
           className={`flex gap-10 mt-1 overflow-x-scroll  custom-scrollbar pb-1`}
         >
           {data.map((val, index) => (

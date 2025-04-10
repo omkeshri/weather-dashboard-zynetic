@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 
-const WeatherInfo = ({}) => {
-  const currentWeatherData = useSelector(
-    (store) => store.currentWeather.currentWeatherData
-  );
-
+const WeatherInfo = ({currentWeatherData}) => {
   if (!currentWeatherData || Object.keys(currentWeatherData).length === 0)
-    return "hash";
+    return;
 
   const { main, description, icon, city, country, temp } = currentWeatherData;
   
@@ -28,7 +23,7 @@ const WeatherInfo = ({}) => {
         {temp}°C
       </h1>
 
-      {/* <h3 className="text-lg mb-2 tracking-wide">{main}</h3> */}
+      <h3 className="text-lg mb-2 tracking-wide">{main}</h3>
 
       <p className="text-xs tracking-wide text-center">
         {description}
