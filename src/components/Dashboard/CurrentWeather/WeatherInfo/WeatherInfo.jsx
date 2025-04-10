@@ -5,11 +5,12 @@ const WeatherInfo = ({}) => {
   const currentWeatherData = useSelector(
     (store) => store.currentWeather.currentWeatherData
   );
+
   if (!currentWeatherData || Object.keys(currentWeatherData).length === 0)
     return "hash";
-  const { main, description, icon } = currentWeatherData?.weather[0];
-  const city = currentWeatherData.name;
-  const country = currentWeatherData.sys.country;
+
+  const { main, description, icon, city, country, temp } = currentWeatherData;
+  
   
   return (
     <div className=" flex flex-col items-center px-10 pt-10 pb-10">
@@ -24,13 +25,13 @@ const WeatherInfo = ({}) => {
       </div>
 
       <h1 className="text-6xl font-medium mb-2">
-        {Math.trunc(currentWeatherData.main.temp)}°C
+        {temp}°C
       </h1>
 
-      <h3 className="text-lg mb-2 tracking-wide">{main}</h3>
+      {/* <h3 className="text-lg mb-2 tracking-wide">{main}</h3> */}
 
       <p className="text-xs tracking-wide text-center">
-        {description.toUpperCase()}
+        {description}
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ForeCastCard from "./ForeCastCard";
 import { useSelector } from "react-redux";
 import Shimmer from "../../Shimmer/Shimmer";
@@ -36,9 +36,9 @@ const WeatherForecastContainer = ({ id, badge, label, data = [] }) => {
               key={index}
               time={val?.time}
               date={val?.date}
-              city={val?.name}
-              temp={Math.trunc(val?.main.temp)}
-              icon={val?.weather[0].icon}
+              city={val?.city}
+              temp={val?.temp}
+              icon={val?.icon}
             />
           ))}
         </div>

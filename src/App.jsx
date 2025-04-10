@@ -3,7 +3,7 @@ import { FaLightbulb } from "react-icons/fa";
 import { MdNightlightRound } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "./utils/appSlice";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,10 +34,12 @@ function App() {
 
       <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
 
-      <motion.div className="absolute top-0 left-0 w-full h-full flex justify-center items-center md:pt-6  pt-20 px-2 md:px-20 xl:px-32 py-6"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}>
+      <motion.div
+        className="absolute top-0 left-0 w-full h-full flex justify-center items-center md:pt-6  pt-20 px-2 md:px-20 xl:px-20 py-6"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <Body />
       </motion.div>
     </div>

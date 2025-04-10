@@ -16,12 +16,11 @@ import Shimmer from "../Shimmer/Shimmer";
 const Body = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState(0);
-  const currentTheme = useSelector(store => store.app.theme)
+  const currentTheme = useSelector((store) => store.app.theme);
 
   const dailyForeCastData = useSelector(
     (store) => store.dailyForeCast.dailyForeCastData
   );
-  console.log(dailyForeCastData)
 
   const hourlyForecastData = useSelector(
     (store) => store.hourlyForeCast.hourlyForecastData
@@ -32,13 +31,11 @@ const Body = () => {
   );
 
   useEffect(() => {
-    
-
     const fetchData = async () => {
-      const {lat, lon} = await getUserLocation();
-      dispatch(addLocation({lat, lon}));
-      const { dailyForeCastFilteredData, hourlyForeCastFilteredData } =
-        await fetchWeatherData("lat="+lat+"&lon="+lon);
+      const { lat, lon } = await getUserLocation();
+      dispatch(addLocation({ lat, lon }));
+
+      const { dailyForeCastFilteredData, hourlyForeCastFilteredData } = await fetchWeatherData("lat=" + lat + "&lon=" + lon);
       dispatch(addDailyForeCastData(dailyForeCastFilteredData));
       dispatch(addHourlyForeCastData(hourlyForeCastFilteredData));
     };
@@ -46,12 +43,17 @@ const Body = () => {
     fetchData();
   }, []);
 
-
   return (
-    <div className={`w-full ${currentTheme==='light'?"bg-[#fff] opacity-70 text-black":"bg-black opacity-80 text-white"}  rounded-4xl  flex xl:flex-row flex-col  overflow-scroll no-scrollbar h-full`}>
+    <div
+      className={`w-full ${
+        currentTheme === "light"
+          ? "bg-[#fff] opacity-70 text-black"
+          : "bg-black opacity-80 text-white"
+      }  rounded-4xl  flex xl:flex-row flex-col  overflow-scroll no-scrollbar h-full`}
+    >
       <div className="w-full xl:w-1/2 px-10 pt-10 space-y-2">
         <Search setError={(err) => setError(err)} />
-        {!error ? <CurrentWeatherContainer setError={setError}/> : <></>}
+        {!error ? <CurrentWeatherContainer setError={setError} /> : <></>}
         {error ? <Error err={error} /> : <></>}
       </div>
 

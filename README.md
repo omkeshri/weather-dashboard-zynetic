@@ -14,7 +14,7 @@ components/
         
 ```
 ```
-                                    Current Weather Container                   ForeCast Section
+                                    Current Weather Container                   ForeCast Section                
                              ------------------------------------------------------------------------------
                             |                                      |                                       |
                             |                                      |                                       |

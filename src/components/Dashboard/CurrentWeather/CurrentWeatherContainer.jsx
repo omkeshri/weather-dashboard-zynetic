@@ -3,8 +3,8 @@ import WeatherInfo from "./WeatherInfo/WeatherInfo";
 import WeatherStatsContainer from "./WeatherStats/WeatherStatsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentWeatherData } from "../../../utils/currentWeatherSlice";
-import { getCurrentWeatherData } from "../../../utils/helper";
-import { addCityCountry, setShowShimmer } from "../../../utils/appSlice";
+import { getCurrentWeatherData, getRequiredData } from "../../../utils/helper";
+import { setShowShimmer } from "../../../utils/appSlice";
 import Shimmer from "../../Shimmer/Shimmer";
 
 const CurrentWeatherContainer = ({ setError }) => {
@@ -21,17 +21,23 @@ const CurrentWeatherContainer = ({ setError }) => {
     if (!lat || !lon) return;
     const fetchWeather = async () => {
       const data = await getCurrentWeatherData("lat=" + lat + "&lon=" + lon);
+      
       if (data.error) {
         console.error("Error fetching weather data:", data.error);
         setError(data.error); // Update state with the error
         return;
       }
-      dispatch(addCurrentWeatherData(data));
-      const city = data.name;
-      const country = data.sys.country;
-      dispatch(addCityCountry({ city, country }));
+
+      dispatch(addCurrentWeatherData(getRequiredData(data, data.name)));
+
       dispatch(setShowShimmer(0));
+      
+      // for testing purpose plz ignore
+      // const city = data.name;
+      // const country = data.sys.country;
+      // dispatch(addCityCountry({ city, country }));
     };
+
     fetchWeather();
   }, [lat, lon]);
 

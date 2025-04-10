@@ -8,24 +8,30 @@ import WeatherDetailCard from "./WeatherDetailCard";
 import { useSelector } from "react-redux";
 
 const WeatherStatsContainer = () => {
-  const currentWeatherData = useSelector((store) => store.currentWeather.currentWeatherData);
-  if (!currentWeatherData || Object.keys(currentWeatherData).length === 0) return "hash";
+  const currentWeatherData = useSelector(
+    (store) => store.currentWeather.currentWeatherData
+  );
+  if (!currentWeatherData || Object.keys(currentWeatherData).length === 0)
+    return "hash";
+
+  const {temp, feelsLike, windSpeed, windGust, humidity, visibility} = currentWeatherData;
+
   const feelLikeDescription =
-  Math.trunc(currentWeatherData.main.temp) < Math.trunc(currentWeatherData.main.feels_like)
-    ? "Humidity is making it feel warmer"
-    : Math.trunc(currentWeatherData.main.temp) > Math.trunc(currentWeatherData.main.feels_like)
-    ? "Wind is making it feel colder"
-    : "Feels just like the actual temperature";
+    temp <
+    feelsLike
+      ? "Humidity is making it feel warmer"
+      : temp >
+        feelsLike
+      ? "Wind is making it feel colder"
+      : "Feels just like the actual temperature";
 
-
-  const windDirection = getWindDirection(currentWeatherData.wind.speed);
+  const windDirection = getWindDirection(windSpeed);
   const windSpeedDescription =
     "Wind is blowing from " +
     windDirection +
     ", gust is " +
-    currentWeatherData.wind.gust;
+    windGust;
 
-  const humidity = currentWeatherData.main.humidity;
   const humidityDescription =
     humidity < 30
       ? "Low, Dry Air"
@@ -38,21 +44,21 @@ const WeatherStatsContainer = () => {
       <WeatherDetailCard
         icon={<PiThermometer />}
         label="FEELS LIKE"
-        value={currentWeatherData.main.feels_like}
+        value={feelsLike}
         unit="°C"
         description={feelLikeDescription}
       />
       <WeatherDetailCard
         icon={<LuWind />}
         label="WIND SPEED"
-        value={currentWeatherData.wind.speed}
+        value={windSpeed}
         unit="mph"
         description={windSpeedDescription}
       />
       <WeatherDetailCard
         icon={<FaRegEye />}
         label="VISIBILITY"
-        value={currentWeatherData.visibility / 1000}
+        value={visibility}
         unit="km"
         description=""
       />

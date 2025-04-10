@@ -45,15 +45,15 @@ export const getWindDirection = (deg) => {
 
 export const filteredDailyForeCastData = (weatherData) =>
   weatherData.reduce((acc, item) => {
-    if (item.dt_txt.includes("00:00:00")) {
+    if (item.dt_txt.includes("12:00:00")) {
       acc.push({
-        weather: [{ icon: item.weather[0].icon }],
+         icon: item.weather[0].icon,
 
         date:
           item.dt_txt.split(" ")[0].split("-")[2] +
           "-" +
           item.dt_txt.split(" ")[0].split("-")[1], // Extracts only the date part
-        main: { temp: item.main.temp },
+        temp: Math.trunc(item.main.temp) ,
       });
     }
     return acc;
@@ -68,10 +68,9 @@ export const filteredHourlyForeCastData = (weatherData) => {
     if (item.dt_txt.startsWith(today)) {
       // Filter only today's data
       data.push({
-        weather: [{ icon: item.weather[0].icon }],
-
+        icon: item.weather[0].icon,
         time: item.dt_txt.split(" ")[1].split(":")[0] + ":00", // Extracts only the date part
-        main: { temp: item.main.temp },
+        temp: Math.trunc(item.main.temp),
       });
     }
   });
@@ -137,4 +136,26 @@ export const getUserLocation = () => {
       resolve({ lat: 28.7, lon: 77.1 });
     }
   });
+};
+
+export const getRequiredData = (weatherData, city) => {
+  return {
+    main: weatherData?.weather[0].main,
+    icon: weatherData?.weather[0].icon,
+    description: weatherData?.weather[0].description.toUpperCase(),
+
+    temp: Math.trunc(weatherData?.main.temp),
+    feelsLike: Math.trunc(weatherData?.main.feels_like),
+    humidity: weatherData?.main.humidity,
+
+    visibility: weatherData?.visibility / 1000,
+
+    windSpeed: Math.trunc(weatherData?.wind.speed),
+    windDeg: weatherData?.wind.deg,
+    windGust: Math.trunc(weatherData?.wind.gust),
+
+    city: city.toUpperCase(),
+    country: weatherData?.sys.country,
+
+  };
 };
